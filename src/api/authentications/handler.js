@@ -4,6 +4,10 @@ class AuthenticationsHandler {
     this._usersService = usersService;
     this._tokenManager = tokenManager;
     this._validator = validator;
+
+    this.postAuthenticationHandler = this.postAuthenticationHandler.bind(this);
+    this.putAuthenticationHandler = this.putAuthenticationHandler.bind(this);
+    this.deleteAuthenticationHandler = this.deleteAuthenticationHandler.bind(this);
   }
 
   async postAuthenticationHandler(request, h) {
@@ -38,7 +42,7 @@ class AuthenticationsHandler {
     await this._authenticationsService.verifyRefreshToken(refreshToken);
     const { id } = this._tokenManager.verifyRefreshToken(refreshToken);
 
-    const { accessToken } = this._tokenManager.generateAccessToken({ id });
+    const  accessToken  = this._tokenManager.generateAccessToken({ id });
     return {
       status: 'success',
       message: 'Access Token berhasil diperbarui',
