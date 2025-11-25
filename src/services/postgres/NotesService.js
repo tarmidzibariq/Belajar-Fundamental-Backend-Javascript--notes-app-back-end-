@@ -10,7 +10,9 @@ class NotesService {
     this._pool = new Pool();
   }
 
-  async addNote({ title, body, tags, owner }) {
+  async addNote({
+    title, body, tags, owner,
+  }) {
     const id = nanoid(16);
     const createdAt = new Date().toISOString();
     const updatedAt = createdAt;
@@ -48,13 +50,13 @@ class NotesService {
   }
 
   async getNotes(owner) {
-  const query = {
-    text: 'SELECT * FROM notes WHERE owner = $1',
-    values: [owner],
-  };
-  const result = await this._pool.query(query);
-  return result.rows.map(mapDBToModel);
-}
+    const query = {
+      text: 'SELECT * FROM notes WHERE owner = $1',
+      values: [owner],
+    };
+    const result = await this._pool.query(query);
+    return result.rows.map(mapDBToModel);
+  }
 
   async getNoteById(id) {
     const query = {
@@ -122,15 +124,16 @@ class NotesService {
 
     // this._notes.splice(index, 1);
   }
+
   async verifyNoteOwner(id, owner) {
-    const query ={
+    const query = {
       text: 'SELECT * FROM notes WHERE id = $1',
-      values : [id],
+      values: [id],
     };
 
     const result = await this._pool.query(query);
 
-    if(!result.rows.length) {
+    if (!result.rows.length) {
       throw new NotFoundError('Catatan tidak ditemukan');
     }
 
