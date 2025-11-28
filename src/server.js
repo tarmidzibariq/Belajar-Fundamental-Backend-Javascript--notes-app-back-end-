@@ -36,7 +36,9 @@ const init = async () => {
     host: process.env.HOST,
     routes: {
       cors: {
-        origin: ['*'],
+        origin: ['http://localhost:8080'],
+        additionalHeaders: ['Content-Type', 'Authorization'],
+        additionalExposedHeaders: ['Authorization'],
       },
     },
   });
