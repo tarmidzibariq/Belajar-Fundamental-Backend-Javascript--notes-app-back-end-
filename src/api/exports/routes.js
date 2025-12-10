@@ -1,7 +1,7 @@
 const routes = (handler) => [
     {
-        method: 'GET',
-        path: '/exports/notes',
+        method: 'POST',
+        path: '/export/notes',
         handler: handler.postExportNotesHandler,
         options: {
             auth: 'notesapp_jwt',
