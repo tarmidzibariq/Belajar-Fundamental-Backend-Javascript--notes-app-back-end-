@@ -57,9 +57,7 @@ class NotesService {
     try {
       const result = await this._cacheService.get(`notes:${owner}`);
       return JSON.parse(result);
-
     } catch (error) {
-
       const query = {
         text: `SELECT notes.* FROM notes
         LEFT JOIN collaborations ON collaborations.note_id = notes.id
