@@ -1,4 +1,5 @@
 const path = require('path');
+
 const routes = (handler) => [
   {
     method: 'POST',
@@ -12,7 +13,7 @@ const routes = (handler) => [
       },
     },
   },
-    {
+  {
     method: 'GET',
     path: '/upload/{param*}',
     handler: {
